@@ -1,4 +1,4 @@
-export class TableQuestions {
+export class TableQuestion {
   position: number;
   question: string;
 }

@@ -6,11 +6,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ResultsComponent } from './results/results.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'results', component: ResultsComponent }
+  { path: 'results', component: ResultsComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
+
 ];
 
 @NgModule({
