@@ -5,6 +5,7 @@
   <mat-card-content>
     <mat-form-field>
       <input
+        #username
         matInput
         placeholder="Ingrese su Usuario" />
     </mat-form-field>
@@ -12,6 +13,7 @@
     <mat-form-field>
       <input
         type="password"
+        #password
         matInput
         placeholder="Ingrese su Contraseña" />
     </mat-form-field><br />
@@ -19,6 +21,7 @@
       mat-raised-button
       color="primary"
       style="margin-right:5px;"
+      (click)="login(username.value, password.value, $event)"
       >Ingresar
     </button>
 
@@ -30,6 +33,7 @@
       mat-raised-button
       color="accent"
       style="margin-right:5px;"
+      routerLink="/register"
       >Registrarse
     </button>
   </mat-card-content>

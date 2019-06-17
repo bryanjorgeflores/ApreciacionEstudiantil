@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TableElement } from '../../interfaces/elemento';
 
-const ELEMENT_DATA: Array<TableElement> = [
+
+const ELEMENT_DATA: Array<any> = [
   { position: 1, name: 'Profesor 1', value: 'Bueno' },
   { position: 2, name: 'Profesor 2', value: 'Muy Bueno' },
   { position: 3, name: 'Profesor 3', value: 'Regular' },

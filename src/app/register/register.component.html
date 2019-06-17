@@ -5,13 +5,13 @@
 
   <mat-card-content>
     <mat-form-field>
-      <input matInput placeholder="Ingrese su Usuario" />
+      <input matInput placeholder="Ingrese su Usuario" #username/>
       <br />
     </mat-form-field>
     <br />
 
     <mat-form-field>
-      <input matInput placeholder="Nombres y Apellidos" />
+      <input matInput placeholder="Nombres y Apellidos" #name/>
       <br />
     </mat-form-field>
     <br />
@@ -20,20 +20,21 @@
       <input
         type="password"
         matInput
-        placeholder="Ingrese su Contraseña" />
+        placeholder="Ingrese su Contraseña" #password/>
       <br />
     </mat-form-field><br />
     <mat-form-field>
       <input
         type="password"
         matInput
-        placeholder="Repita su Contraseña" />
+        placeholder="Repita su Contraseña" #repassword/>
       <br />
     </mat-form-field><br />
     <button
       mat-raised-button
       color="accent"
       style="margin-right:5px;"
+      (click)="register(username.value, name.value, password.value, repassword.value, $event)"
       >Registrarse
     </button>
       <br />

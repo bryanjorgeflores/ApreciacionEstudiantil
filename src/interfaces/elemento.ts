@@ -1,5 +1,5 @@
-export interface TableElement {
+export interface Teacher {
+  position?: number;
   name: string;
-  position: number;
   value: string;
 }

@@ -1,20 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-import { TableElement } from '../../interfaces/elemento';
-import { TableQuestion } from '../../interfaces/pregunta';
-
-const ELEMENT_DATA: Array<TableElement> = [
-  { position: 1, name: 'Profesor 1', value: '' },
-  { position: 2, name: 'Profesor 2', value: '' },
-  { position: 3, name: 'Profesor 3', value: '' },
-  { position: 4, name: 'Profesor 4', value: '' },
-  { position: 5, name: 'Profesor 5', value: '' },
-  { position: 6, name: 'Profesor 6', value: '' },
-  { position: 7, name: 'Profesor 7', value: '' },
-  { position: 8, name: 'Profesor 8', value: '' },
-  { position: 9, name: 'Profesor 9', value: '' },
-  { position: 10, name: 'Profesor 10', value: '' },
-];
+import { TeacherService } from 'src/services/teacher.service';
+import { ResultService } from 'src/services/result.service';
+import { MatRadioChange, MatRadioButton } from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,21 +11,54 @@ const ELEMENT_DATA: Array<TableElement> = [
 
 
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'value'];
-  dataSource = ELEMENT_DATA;
-  questions: Array<TableQuestion> = [
-    { position: 1, question: '¿Hace el docente un uso correcto del material didáctico?' },
-    { position: 2, question: '¿Es justo en sus calificaciones?' },
+
+  displayedColumns: Array<string> = ['position', 'name', 'value'];
+  questions: Array<string> = [
+    '¿Hace el docente un uso correcto del material didáctico?',
+    '¿Es justo en sus calificaciones?',
+    '¿El Docente cumple con los Horarios de Clases?',
   ];
+  indexQuestion = 0;
+
 
   constructor(
+    public teacherService: TeacherService,
+    private resultService: ResultService,
 
   ) { }
 
   ngOnInit(): void {
-
+    console.log(this.resultService.results);
   }
-  aumentar() {
+
+  onChange(mrChange: MatRadioChange): void {
+    console.log('mrChage.value', mrChange.value);
+    const mrButton: MatRadioButton = mrChange.source;
+    const mrName = +mrButton.name.split('-')[3];
+    const mrId = +mrButton.id.split('-')[2];
+    const select = mrName / 6;
+
+    this.resultService.results[this.indexQuestion][select][mrId - (mrName + 2)] = +mrChange.value;
+  }
+
+  next(): void {
+
+    if (this.indexQuestion === this.questions.length - 1) {
+      this.indexQuestion = 0;
+      return;
+    }
+    this.indexQuestion++;
+  }
+  back(): void {
+
+    if (this.indexQuestion === 0) {
+      this.indexQuestion = this.questions.length - 1;
+      return;
+    }
+    this.indexQuestion--;
+  }
+
+  postAnswers(): void {
 
   }
 
