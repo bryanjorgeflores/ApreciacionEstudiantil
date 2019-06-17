@@ -1,19 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TeacherService } from 'src/services/teacher.service';
+import { GetService } from 'src/services/http.service/get.service';
 
-
-
-const ELEMENT_DATA: Array<any> = [
-  { position: 1, name: 'Profesor 1', value: 'Bueno' },
-  { position: 2, name: 'Profesor 2', value: 'Muy Bueno' },
-  { position: 3, name: 'Profesor 3', value: 'Regular' },
-  { position: 4, name: 'Profesor 4', value: 'Bueno' },
-  { position: 5, name: 'Profesor 5', value: 'Bueno' },
-  { position: 6, name: 'Profesor 6', value: 'Regular' },
-  { position: 7, name: 'Profesor 7', value: 'Malo' },
-  { position: 8, name: 'Profesor 8', value: 'Bueno' },
-  { position: 9, name: 'Profesor 9', value: 'Regular' },
-  { position: 10, name: 'Profesor 10', value: 'Muy Malo' },
-];
 
 @Component({
   selector: 'app-results',
@@ -21,13 +10,30 @@ const ELEMENT_DATA: Array<any> = [
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent implements OnInit {
+  result: Array<number>;
+  quantity: number;
   displayedColumns: string[] = ['position', 'name', 'value'];
-  dataSource = ELEMENT_DATA;
   constructor(
+    private router: Router,
+    public teacherService: TeacherService,
+    private getService: GetService
 
   ) { }
 
   ngOnInit(): void {
+    const user = localStorage.getItem('user');
+    if (user === null || user === undefined) {
+      this.router.navigateByUrl('/login');
+      return;
+    }
+
+    this.getService.getResult()
+      .subscribe(result => {
+        this.result = result.result;
+        this.quantity = result.quantity;
+        console.log(this.result);
+      },
+      err => console.error(err.error.text));
   }
 
 }

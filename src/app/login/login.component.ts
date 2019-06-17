@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/services/http.service/post.service';
 import { Router } from '@angular/router';
 import { User } from 'src/interfaces/models/user.model';
+import { ResultService } from 'src/services/result.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private postService: PostService,
     private router: Router,
+    private resultService: ResultService,
 
   ) { }
 
@@ -43,6 +45,9 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (user: User) => {
           localStorage.setItem('user', JSON.stringify(user));
+          this.resultService.resultsUser = user.result;
+          this.resultService.userStatus = user.status;
+          console.log(this.resultService.resultsUser);
           this.router.navigateByUrl('/dashboard');
         },
         err => {

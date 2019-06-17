@@ -21,6 +21,7 @@ import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ResultsComponent } from './results/results.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -29,7 +30,9 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    ResultsComponent
+    ResultsComponent,
+    FooterComponent,
+
   ],
   imports: [
     BrowserModule,

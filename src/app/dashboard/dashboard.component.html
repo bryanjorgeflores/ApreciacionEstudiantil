@@ -26,12 +26,10 @@
       <ng-container matColumnDef="value">
         <mat-header-cell *matHeaderCellDef>Calificación</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          {{element.value}}
-          <br />
           <mat-radio-group (change)="onChange($event)">
             <mat-radio-button value='1'>Muy Malo</mat-radio-button>
             <mat-radio-button value='2'>Malo</mat-radio-button>
-            <mat-radio-button value='3' [checked]='true'>Regular</mat-radio-button>
+            <mat-radio-button value='3'>Regular</mat-radio-button>
             <mat-radio-button value='4'>Bueno</mat-radio-button>
             <mat-radio-button value='5'>Muy bueno</mat-radio-button>
           </mat-radio-group>
@@ -44,15 +42,25 @@
 
     <br />
 
-    <button mat-raised-button color="primary" (click)='next()'>
-      Siguiente pregunta
+    <button
+      *ngIf="indexQuestion !== 2"
+      mat-raised-button
+      color="primary"
+      [disabled]="resultService.results[indexQuestion].length < 10"
+      (click)='next()'
+      >Siguiente pregunta
     </button>
-    <button mat-raised-button color="primary" (click)='back()'>
-      Anterior pregunta
+    <button
+      *ngIf="indexQuestion === 2"
+      mat-raised-button
+      color="secondary"
+      [disabled]="resultService.results[indexQuestion].length < 10"
+      (click)="postAnswers()"
+      >Mandar Respuestas
     </button>
-    <button mat-raised-button *ngIf="indexQuestion === 2" color="secondary" (click)="postAnswers()">
-      Mandar Respuestas
-    </button>
+    <app-footer
+      style="position:absolute;right:25px;">
+    </app-footer>
   </mat-card-content>
 
 </mat-card>
