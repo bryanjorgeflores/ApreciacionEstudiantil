@@ -15,6 +15,15 @@ export class ResultService {
 
   public userStatus = false;
 
+  resetValues(): void {
+    this.results = [
+      [ ],
+      [ ],
+      [ ],
+    ];
+    this.resultsUser = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+  }
+
 }
 
 

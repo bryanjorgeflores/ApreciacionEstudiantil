@@ -26,7 +26,7 @@
       <ng-container matColumnDef="value">
         <mat-header-cell *matHeaderCellDef>Calificación</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <mat-radio-group (change)="onChange($event)">
+          <mat-radio-group (change)="onChange($event, element.position)">
             <mat-radio-button value='1'>Muy Malo</mat-radio-button>
             <mat-radio-button value='2'>Malo</mat-radio-button>
             <mat-radio-button value='3'>Regular</mat-radio-button>
@@ -46,15 +46,15 @@
       *ngIf="indexQuestion !== 2"
       mat-raised-button
       color="primary"
-      [disabled]="resultService.results[indexQuestion].length < 10"
-      (click)='next()'
+      [disabled]="resultService.results[indexQuestion].length < 10 || resultService.results[indexQuestion].includes(undefined)"
+      (click)="next()"
       >Siguiente pregunta
     </button>
     <button
       *ngIf="indexQuestion === 2"
       mat-raised-button
       color="secondary"
-      [disabled]="resultService.results[indexQuestion].length < 10"
+      [disabled]="resultService.results[indexQuestion].length < 10 || resultService.results[indexQuestion].includes(undefined)"
       (click)="postAnswers()"
       >Mandar Respuestas
     </button>

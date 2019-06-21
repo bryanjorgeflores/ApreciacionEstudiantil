@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
     '¿El Docente cumple con los Horarios de Clases?',
   ];
   indexQuestion = 0;
-  status: Array<boolean> = [ false, false, false ];
+  status: any = [];
 
   constructor(
     public teacherService: TeacherService,
@@ -44,30 +44,24 @@ export class DashboardComponent implements OnInit {
     console.log(this.resultService.results);
   }
 
-  onChange(mrChange: MatRadioChange): void {
-    console.log('mrChage.value', mrChange.value);
+
+  onChange(mrChange: MatRadioChange, position: number): void {
     const mrButton: MatRadioButton = mrChange.source;
-
-    const mrName = +mrButton.name.split('-')[3];
-    const select = mrName / 6;
-    console.log(select);
-
-    this.resultService.results[this.indexQuestion][select] = +mrChange.value;
-    console.log(this.resultService.results);
+    this.status[position - 1] = mrButton;
     console.log(this.status);
+    console.log(mrButton);
+    this.resultService.results[this.indexQuestion][position - 1] = +mrChange.value;
   }
 
   next(): void {
-
     if (this.indexQuestion === this.questions.length - 1) {
       this.indexQuestion = 0;
       return;
     }
     for (let i = 0; i <= 9; i++) {
       this.resultService.resultsUser[i] += this.resultService.results[this.indexQuestion][i];
-
+      this.status[i].checked = false;
     }
-
     this.indexQuestion++;
 
     console.log(this.resultService.resultsUser);
@@ -79,12 +73,12 @@ export class DashboardComponent implements OnInit {
       this.resultService.resultsUser[i] += this.resultService.results[this.indexQuestion][i];
     }
 
-    let resultsUser = {
+    const resultsUser = {
       _id: JSON.parse(localStorage.getItem('user'))._id,
       result: this.resultService.resultsUser
-    }
+    };
 
-    console.log(resultsUser)
+    console.log(resultsUser);
 
     this.putService.putResults(resultsUser)
       .subscribe(

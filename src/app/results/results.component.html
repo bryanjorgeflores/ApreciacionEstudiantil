@@ -1,17 +1,19 @@
 <br />
 
-<div class="container" style="display:flex; justify-content:center;">
+<div class="container" style="display:flex;justify-content:center;">
   <div class="row">
     <div class="col-lg-2 col-md-1"></div>
 
     <div class="col-lg-8 col-md-10">
+      <h3 style="text-align:center;">De {{quantity}} estudiantes</h3>
       <div class="table table-responsive table-striped">
         <table class="table">
           <thead>
             <tr>
-              <th class="text-center" style="padding: 15px 100px">#</th>
-              <th class="text-center" style="padding: 15px 100px">Profesor</th>
-              <th class="text-center" style="padding: 15px 100px">Valor</th>
+              <th class="text-center" style="padding:15px 100px;">#</th>
+              <th class="text-center" style="padding:15px 100px;">Profesor</th>
+              <th class="text-center" style="padding:15px 100px;">Puntuación</th>
+              <th class="text-center" style="padding:15px 100px;">Resultado</th>
             </tr>
           </thead>
 
@@ -19,16 +21,22 @@
             <tr *ngFor="let res of result; let i = index;">
               <td
                 class="text-center"
-                style="padding: 15px 100px"
+                style="padding:15px 100px;"
                 >{{teacherService.teachers[i].position}}</td>
               <td
                 class="text-center"
-                style="padding: 15px 100px"
+                style="padding:15px 100px;"
                 >{{teacherService.teachers[i].name}}</td>
               <td
                 class="text-center"
-                style="padding: 15px 100px">
-                {{res / (quantity * 3) | number: '1.0-0'}}
+                style="padding:15px 100px;">
+                {{res}}
+              </td>
+              <td
+                class="text-center"
+                [style.color]="setResult(res / (quantity * 3)).color"
+                style="padding:15px 100px;">
+                {{setResult(res / (quantity * 3)).qualification}}
               </td>
             </tr>
           </tbody>
@@ -40,5 +48,7 @@
   </div>
 
 </div>
-
-<app-footer style="position:absolute;right:25px;"></app-footer>
+<br/>
+<app-footer
+  style="position:absolute;right:25px;">
+</app-footer>

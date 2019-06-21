@@ -20,10 +20,12 @@ export class FooterComponent implements OnInit {
 
   logOut(): void {
     localStorage.clear();
-    this.resultService.results = [ [ ], [ ], [ ],
-    ];
-    this.resultService.resultsUser = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+    this.resultService.results = [ [ ], [ ], [ ], ];
+    this.resultService.resetValues();
     this.resultService.userStatus = false;
+    console.log(this.resultService.results);
+    console.log(this.resultService.resultsUser);
+    console.log(this.resultService.userStatus);
 
     this.router.navigateByUrl('/login');
   }
