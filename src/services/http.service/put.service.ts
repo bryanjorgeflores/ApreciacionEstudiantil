@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const urlPut = 'http://localhost:3000';
+const urlPut = 'https://student-appreciation.herokuapp.com';
 
 
 @Injectable({
@@ -19,3 +19,8 @@ export class PutService {
   }
 
 }
+
+
+
+
+

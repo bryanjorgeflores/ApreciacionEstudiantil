@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from 'src/interfaces/models/user.model';
 import { Observable } from 'rxjs';
 
-const urlPost = 'http://localhost:3000';
+const urlPost = 'https://student-appreciation.herokuapp.com';
 
 
 @Injectable({
